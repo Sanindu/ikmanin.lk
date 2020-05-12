@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { Advertisement } from 'src/app/data-models/Advertisement';
 import {Location} from 'src/app/data-models/Location';
+import {AddNewService } from 'src/app/services/advertisement-services/add-new.service';
+
 
 
 
@@ -15,11 +17,18 @@ userModel = new Advertisement();
 locationModel = new Location();
 
  onSubmit(){
-   console.log(this.userModel);
-   console.log(this.locationModel);
+   this.addnewservice.submitForm1(this.userModel).subscribe (
+     data => console.log('Sucess !' , data),
+     error => console.error('Error', error)
+ );
+
+   this.addnewservice.submitFormlocation(this.locationModel).subscribe (
+  data => console.log('Sucess !' , data),
+  error => console.error('Error', error)
+);
 
  }
-  constructor() { }
+  constructor( private addnewservice: AddNewService) { }
 
   ngOnInit(): void {
   }
