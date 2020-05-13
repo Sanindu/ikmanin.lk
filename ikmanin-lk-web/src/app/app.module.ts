@@ -23,7 +23,6 @@ import { HomeComponent } from './components/home/home.component';
 import { AdvertisementService } from './services/advertisement-services/advertisement.service';
 import { AdvertisementViewerComponent } from './components/advertisement-viewer/advertisement-viewer.component';
 import { AddNewComponent } from './components/add-new/add-new.component';
-import {FormsModule} from '@angular/forms';
 
 
 
@@ -42,6 +41,7 @@ import {FormsModule} from '@angular/forms';
     HomeComponent,
     AdvertisementViewerComponent,
     AddNewComponent
+    
   ],
   imports: [
     BrowserModule,
@@ -49,8 +49,7 @@ import {FormsModule} from '@angular/forms';
     BrowserAnimationsModule,
     MatToolbarModule,
     FlexLayoutModule,
-    HttpClientModule,
-    FormsModule
+    HttpClientModule
   ],
   providers: [AdvertisementService],
   bootstrap: [AppComponent]
