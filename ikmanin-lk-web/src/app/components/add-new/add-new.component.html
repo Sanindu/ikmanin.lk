@@ -9,33 +9,33 @@
 
     <form #userForm = "ngForm" (ngSubmit)="onSubmit()">
 
+
    <div>
     <form #advertisementForm="ngForm">
-     <!--<form (ngSubmit)="onSubmit()" #advertisementForm="ngForm">--> 
+     <!--<form (ngSubmit)="onSubmit()" #advertisementForm="ngForm">-->
 
 
       <div class="form-group row">
         <label for="category" class="col-6 col-form-label">Category</label>
         <div class="col-6">
-            <option value="Motorbikes &amp; Scooters">Motorbikes &amp; Scooters</option>
-            <option value="Three Wheelers">Three Wheelers</option>
-            <option value="Bicycles">Bicycles</option>
-            <option value="Vans">Vans</option>
-            <option value="Buses">Buses</option>
-            <option value="Lorries">Lorries</option>
-            <option value="Cars">Cars</option>
-          <select id="category" name="category" class="custom-select" required="required" [(ngModel)] = "userModel.category">
+         <select id="category" name="category" #categ = "ngModel" class="custom-select" required  [(ngModel)] = "userModel.category">
+                 <option *ngFor = "let categories of category" >{{categories}}</option>
           </select>
+          <div *ngIf =" categ.errors &&  categ.touched">
+            <small class="text-danger" > Please select a Category </small>
+       </div>
         </div>
+
+
       </div>
 
       <div class="form-group row">
-        <label for="bio" class="col-6 col-form-label">Bio bio</label>
+        <label for="bio" class="col-6 col-form-label">Bio</label>
         <div class="col-6">
           <textarea id="bio" name="bio" cols="40" rows="5" class="form-control" required="required" [(ngModel)] = "userModel.bio"></textarea>
         </div>
       </div>
-      
+
 
 
       <div class="form-group row">
@@ -45,33 +45,48 @@
             <div class="input-group-prepend">
               <div class="input-group-text">Rs.</div>
             </div>
-            <input id="price" name="price" placeholder="Enter the Price" type="text" class="form-control" required="required" [(ngModel)] = "userModel.price">
-          </div>
+
+              <input id="price" #price = "ngModel" name="price" pattern = "[0-9]" placeholder="Enter the Price" type="text" [class.is-invalid]="price.invalid && price.touched" class="form-control" required="required" [(ngModel)] = "userModel.price">
+           </div>
+          <div *ngIf =" price.errors &&  price.touched">
+            <small *ngIf = "price.errors.required" class ="text-danger" > Please Enter the Price </small>
+            <small *ngIf = "price.errors.pattern" class="text-danger" > Invalid Price </small>
+       </div>
         </div>
       </div>
-      
-      
+
+
 
       <div ngModelGroup  = "location">
       <div class="form-group row">
         <label for="city" class="col-6 col-form-label">City</label>
         <div class="col-6">
-          <input id="city" name="city" placeholder="Enter the City" type="text" class="form-control" [(ngModel)] = "locationModel.city" >
+          <input id="city" name="city" placeholder="Enter the City" #city = "ngModel" required = "required" type="text" class="form-control" [(ngModel)] = "locationModel.city" >
+          <div *ngIf =" city.errors &&  city.touched">
+            <small class="text-danger" > Please Enter the City </small>
+       </div>
         </div>
+
+
       </div>
 
       <div class="form-group row">
         <label for="town" class="col-6 col-form-label">Town</label>
         <div class="col-6">
-          <input id="town" name="town" placeholder="Enter the Town" type="text" class="form-control" [(ngModel)] = "locationModel.town">
+          <input id="town" name="town" placeholder="Enter the Town" #town ="ngModel" type="text" class="form-control" [(ngModel)] = "locationModel.town" required = "required">
+          <div *ngIf =" town.errors &&  town.touched">
+            <small class="text-danger" > Please Enter the Town </small>
+       </div>
         </div>
       </div>
 
       <div class="form-group row">
         <label for="district" class="col-6 col-form-label">District</label>
         <div class="col-6">
-          <input id="district" name="district" placeholder="Enter the District" type="text" class="form-control" [(ngModel)] = "locationModel.district">
-        </div>
+          <input id="district" name="district" placeholder="Enter the District" #district = "ngModel" type="text" class="form-control" [(ngModel)] = "locationModel.district" required = "required">
+          <div *ngIf =" district.errors &&  district.touched">
+            <small class="text-danger" > Please Enter the District</small>
+       </div>
       </div>
 
     </div>
@@ -80,45 +95,30 @@
       <div class="form-group row">
         <label for="condition" class="col-6 col-form-label">Condition</label>
         <div class="col-6">
-          <select id="condition" name="condition" class="custom-select" required="required" [(ngModel)] = "userModel.condition">
-            <option value="">Used</option>
-            <option value="">Brand New</option>
-            <option value="Reconditioned">Reconditioned</option>
+          <select id="condition" name="condition" #condition ="ngModel" class="custom-select" required="required" [(ngModel)] = "userModel.condition">
+            <option value="used">Used</option>
+            <option value="brandnew">Brand New</option>
+            <option value="reconditioned">Reconditioned</option>
           </select>
-        </div>
+          <div *ngIf =" condition.errors &&  condition.touched">
+            <small class="text-danger" > Please select the Condition </small>
+            </div>
+       </div>
+
+      </div>
       </div>
 
 
       <div class="form-group row">
         <label for="brand" class="col-6 col-form-label">Brand</label>
         <div class="col-6">
-          <select id="brand" name="brand" required="required" class="custom-select" [(ngModel)] = "userModel.brand">
-            <option value="Benz">Benz</option>
-            <option value="Toyota">Toyota</option>
-            <option value="Maruti">Maruti</option>
-            <option value="Other">Other</option>
-              <option>--Select--</option>
-              <option value="Aprilia">Aprilia</option>
-              <option value="Bajaj">Bajaj</option>
-              <option value="BMW">BMW</option>
-              <option value="Chapper">Chapper</option>
-              <option value="Demak">Demak</option>
-              <option value="Haley Davison">Haley Davison</option>
-              <option value="Heer">Heero</option>
-              <option value="Honda">Honda</option>
-              <option value="Kineticd">Kinetic</option>
-              <option value="KTM">KTM</option>
-              <option value="Loncin">Loncin</option>
-              <option value="Mahindra">Mahindra</option>
-              <option value="Ranamoto">Ranamoto</option>
-              <option value="Royal Enfield">Royal Enfield</option>
-              <option value="Scooty">Scooty</option>
-              <option value="Suzuki">Suzuki</option>
-              <option value="TVS">TVS</option>
-              <option value="Vespa">Vespa</option>
-              <option value="Yamaha">Yamaha</option>
-              <option value="Other">*Other Brand</option>
+          <select id="brand" #bran = "ngModel" name="brand" required="required" class="custom-select" [(ngModel)] = "userModel.brand">
+            <option *ngFor = "let brands of brand">{{brands}}</option>
+
           </select>
+          <div *ngIf =" bran.errors &&  bran.touched">
+            <small class="text-danger" > Please Select the Brand </small>
+       </div>
         </div>
       </div>
 
@@ -133,7 +133,9 @@
       <div class="form-group row">
         <label for="modelYear" class="col-6 col-form-label">Model Year</label>
         <div class="col-6">
-          <input id="modelYear" name="modelYear" placeholder="2020" type="text" class="form-control" [(ngModel)] = "userModel.modelYear">
+          <input id="modelYear" #modelyear = "ngModel" name="modelYear" maxlength="4" placeholder= {{currentYear}}  type= "text" class="form-control" [(ngModel)] = "userModel.modelYear">
+
+
         </div>
       </div>
 
@@ -191,7 +193,7 @@
 
 
       <div class="form-group row">
-        <label for="phoneNumber" class="col-6 col-form-label">Phone Number</label>
+        <label for="phoneNumber"  class="col-6 col-form-label">Phone Number</label>
         <div class="col-6">
           <div class="input-group">
             <div class="input-group-prepend">
@@ -199,8 +201,13 @@
                 <i class="fa fa-phone"></i>
               </div>
             </div>
-            <input id="phoneNumber" name="phoneNumber" type="text" class="form-control" required="required" [(ngModel)] = "userModel.phoneNumber">
+            <input id="phoneNumber" #phone ="ngModel" pattern = "^\d{10}$"  name="phoneNumber" type="text" class="form-control" required="required" [(ngModel)] = "userModel.phoneNumber">
+
           </div>
+          <div *ngIf =" phone.errors &&  phone.touched">
+            <small class="text-danger" *ngIf ="phone.errors.required"> Please Enter the Number </small>
+            <small class="text-danger" *ngIf ="phone.errors.pattern"> Enter a Valid number </small>
+       </div>
         </div>
       </div>
 
@@ -234,7 +241,7 @@
 
       <div class="form-group row">
         <div class="offset-6 col-6">
-          <button name="submit" type="submit" class="btn btn-primary" (click)= "onSubmit()">Submit</button >
+          <button name="submit" type="submit" class="btn btn-primary" (click)= "onSubmit()" [disabled] = "userForm.form.invalid">Submit</button >
         </div>
       </div>
     </form>

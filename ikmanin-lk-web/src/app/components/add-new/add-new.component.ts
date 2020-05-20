@@ -1,9 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Advertisement } from 'src/app/data-models/Advertisement';
 import {Location} from 'src/app/data-models/Location';
-import { ViewChild } from '@angular/core';
-import { AdvertisementService } from '../../services/advertisement-services/advertisement.service';
-import { Advertisement } from '../../data-models/Advertisement';
+import { AddnewService } from 'src/app/services/advertisement-services/addnew.service';
 
 
 
@@ -16,37 +14,20 @@ import { Advertisement } from '../../data-models/Advertisement';
 export class AddNewComponent implements OnInit {
 userModel = new Advertisement();
 locationModel = new Location();
+category = ['Motorbikes and Scooters','Three Wheelers','Bicycles','Vans','Buses','Lorries','Cars'];
+brand = ['Aprilia','Bajaj','BMW','Chapper','Demak','Haley Davison','Heero','Honda','Kinetic','KTM','Loncin','Mahindra','Ranamoto','Royal Enfield','Scooty','Suzuki','TVS','Vespa','Yamaha','*Other Brand'];
 
- onSubmit(){
-  constructor() { }
-   console.log(this.locationModel);
-   console.log(this.userModel);
 
-  constructor(
-    private advertisementService : AdvertisementService
-  ) { }
+currentYear: number = new Date().getFullYear();
+
+  constructor(private AddnewService: AddnewService) { }
 
   ngOnInit(): void {
   }
+  onSubmit(){
+    return this.AddnewService.formsubmit(this.userModel);
 
-  onSubmit() { 
-    this.advertisement.userId="5e9854be3bc34b73581b272d"
-    this.advertisement.status=true;
-    this.advertisement.lastUpdatedTime = new Date().toISOString()
-    console.log(this.advertisement)
-    
-  }
 
-  handleLogin(){
-    this.advertisement.userId="5e9b7f55b3519e708848aace"
-    this.advertisement.status=true;
-    this.advertisement.lastUpdatedTime = new Date().toISOString()
-    console.log(this.advertisement)
-    this.form.reset()
-    this.advertisementService.postAnAdvertisement(this.advertisement,this.advertisement.userId).subscribe(
-      response => console.log(response)
-    )
-    
-  }
+    }
 
 }
