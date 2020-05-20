@@ -41,11 +41,7 @@ import { FormsModule } from '@angular/forms';
     ProfileComponent,
     SignUpComponent,
     HomeComponent,
-    AdvertisementViewerComponent,
-    AddNewComponent,
-
-
-
+    AdvertisementViewerComponent
   ],
   imports: [
     BrowserModule,
@@ -53,9 +49,7 @@ import { FormsModule } from '@angular/forms';
     BrowserAnimationsModule,
     MatToolbarModule,
     FlexLayoutModule,
-    HttpClientModule,
-    FormsModule,
-
+    HttpClientModule
   ],
   providers: [AdvertisementService],
   bootstrap: [AppComponent]

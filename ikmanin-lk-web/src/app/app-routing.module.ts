@@ -15,7 +15,6 @@ const routes: Routes = [
   { path: 'advertisement', component: AdvertisementViewerComponent},
   { path: '', redirectTo: '/home', pathMatch: 'full'},
   { path: 'addnew',  component: AddNewComponent },
-
 ];
 
 @NgModule({
